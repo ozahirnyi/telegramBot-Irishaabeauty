@@ -1,6 +1,6 @@
 import telebot as tb
 
-bot = tb.TeleBot('1481133710:AAHc6yyPa3bQJcV86C2HQ9xBmpxNPh-h1hk')
+bot = tb.TeleBot()
 keyboard1 = tb.types.ReplyKeyboardMarkup(True)
 keyboard1.row('Price', 'Contacts', 'Help')
 
