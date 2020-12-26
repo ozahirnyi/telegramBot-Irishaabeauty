@@ -1,16 +1,5 @@
-import telebot as tb
-
-bot = tb.TeleBot('1481133710:AAHc6yyPa3bQJcV86C2HQ9xBmpxNPh-h1hk')
-
-# Main keyboard
-main_keyboard = tb.types.ReplyKeyboardMarkup(True)
-main_keyboard.row('Price', 'Contacts', 'Help')
-
-# Start keyboard
-s_key_b1 = tb.types.InlineKeyboardButton(text="Заказать", callback_data="Zakazat")
-s_key_b2 = tb.types.InlineKeyboardButton(text="Подобрать", callback_data="Vibrat")
-start_keyboard = tb.types.InlineKeyboardMarkup()
-start_keyboard.add(s_key_b2, s_key_b1)
+from back.config import bot, main_keyboard, start_keyboard
+import back.binary as bin_tree
 
 
 # Start
@@ -31,7 +20,7 @@ def parse_input_message(message):
         bot.send_message(message.chat.id, "Улыбка на Миллион! : 327 гривень")
         bot.send_photo(message.chat.id, img)
     elif message.text.lower() == 'contacts':
-        bot.send_message(message.chat.id, "instagram: @irisha_abeauty"
+        bot.send_message(message.chat.id, "instagram: @irisha_beauty"
                                           "\n\ntelegram: @irishaa_antonova"
                                           "\n\nphone: +380952180492")
 
@@ -46,6 +35,7 @@ def help_handler(call):
                 bot.send_photo(call.message.chat.id, img)
         elif call.data == "Vibrat":
             bot.send_message(call.message.chat.id, "tut buted binary tree)")
+            bin_tree.main(call)
 
 
 bot.polling()
