@@ -25,6 +25,7 @@ def parse_input_message(message):
                                           "\n\nphone: +380952180492")
 
 
+# Inline button pressed
 @bot.callback_query_handler(func=lambda call: True)
 def help_handler(call):
     if call.message:

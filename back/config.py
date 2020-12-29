@@ -13,7 +13,7 @@ start_keyboard = tb.types.InlineKeyboardMarkup()
 start_keyboard.add(s_key_b2, s_key_b1)
 
 # Choose helper keyboard
-ch_key_b1 = tb.types.InlineKeyboardButton(text="Да", callback_data="Da")
-ch_key_b2 = tb.types.InlineKeyboardButton(text="Нет", callback_data="Net")
+ch_key_b1 = tb.types.InlineKeyboardButton(text="Первое", callback_data="First")
+ch_key_b2 = tb.types.InlineKeyboardButton(text="Второе", callback_data="Second")
 ch_keyboard = tb.types.InlineKeyboardMarkup()
 ch_keyboard.add(ch_key_b1, ch_key_b2)
