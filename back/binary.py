@@ -20,12 +20,12 @@ def binary_init():
 
 
 # Enum getattr
-class Colors_enum(tuple):
+class colors_enum(tuple):
     __getattr__ = tuple.index
 
 
 # Colors_enum init
-Colors = Colors_enum(['pink', 'yellow', 'lightblue', 'blue', 'red'])
+Colors = colors_enum(['pink', 'yellow', 'lightblue', 'blue', 'red'])
 
 # Binary tree init
 tree = binary_init()
