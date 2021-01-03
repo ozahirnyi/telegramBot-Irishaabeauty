@@ -17,6 +17,7 @@ def binary_init():
     b_tree.right.left.left = Node(4)
     b_tree.left.right.right = Node(4)
     return b_tree
+    chlen
 
 
 # Enum getattr
