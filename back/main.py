@@ -1,5 +1,5 @@
-from back.config import bot, main_keyboard, start_keyboard
-import back.binary as bin_tree
+from config import bot, main_keyboard, start_keyboard
+from back.binary import main, tree_helper_init
 
 
 # Start
@@ -28,6 +28,7 @@ def parse_input_message(message):
 # Inline button pressed
 @bot.callback_query_handler(func=lambda call: True)
 def help_handler(call):
+    print('Call in main is:' + str(call.data))
     if call.message:
         if call.data == "Zakazat":
             for i in range(0, 5):
@@ -36,7 +37,9 @@ def help_handler(call):
                 bot.send_photo(call.message.chat.id, img)
         elif call.data == "Vibrat":
             bot.send_message(call.message.chat.id, "tut buted binary tree)")
-            bin_tree.main(call)
+            main(call)
+        elif call.data == "First" or call.data == "Second":
+            tree_helper_init(call)
 
 
 bot.polling()

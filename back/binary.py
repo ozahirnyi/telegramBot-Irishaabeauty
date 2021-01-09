@@ -31,12 +31,14 @@ Colors = colors_enum(['pink', 'yellow', 'lightblue', 'blue', 'red'])
 tree = binary_init()
 
 
-@bot.callback_query_handler(func=lambda call: True)
+# @bot.callback_query_handler(func=lambda call: True)
 def tree_helper_init(call):
     global tree
 
     if call.message:
+        print('Call in bin is:' + str(call.data))
         if tree is not None:
+            print('ya tut')
             print(tree.value)
             print(tree)
         else:
@@ -53,11 +55,8 @@ def tree_helper_init(call):
 
 
 def main(call):
-
-    print(tree)
+    print('begin of bin tree')
     bot.send_message(call.message.chat.id, "Privet Ya Tebe pomogu)")
     img = open("resources/pink.png", 'rb')
     bot.send_message(call.message.chat.id, "Do you like it?")
     bot.send_photo(call.message.chat.id, img, reply_markup=ch_keyboard)
-
-
