@@ -23,6 +23,8 @@ def parse_input_message(message):
         bot.send_message(message.chat.id, "instagram: @irisha_beauty"
                                           "\n\ntelegram: @irishaa_antonova"
                                           "\n\nphone: +380952180492")
+    else:
+        bot.send_message(message.chat.id, "/start")
 
 
 # Inline button pressed
