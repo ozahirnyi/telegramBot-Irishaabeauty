@@ -1,5 +1,6 @@
-from binarytree import Node
 import random as rand
+import sqlite3
+from binarytree import Node
 from back.config import bot
 from back.config import ch_keyboard
 
@@ -36,14 +37,14 @@ Colors = colors_enum(['svad', 'nude', 'even', 'cock', 'creative'])
 tree = binary_init()
 
 
-@bot.callback_query_handler(func=lambda call: True)
+# @bot.callback_query_handler(func=lambda call: True)
 def tree_helper_init(call):
     global tree
 
     if call.message:
         print(tree)
         if tree.left is None or tree.right is None:
-            bot.send_message(call.message.chat.id, "Vash vibor: " + Colors[tree.value], reply_markup=None)
+            bot.send_message(call.message.chat.id, "Vash vibor: " + Colors[tree.value])
         else:
             if call.data == "First":
                 print("First")
@@ -52,18 +53,23 @@ def tree_helper_init(call):
                 print("Second")
                 tree = tree.right
             bot.send_message(call.message.chat.id, "Do you like it?")
+            print(Colors[tree.value])
             img = open("resources/" + Colors[tree.value] + str(rand.randint(0, 2)) + ".jpeg", 'rb')
             bot.send_photo(call.message.chat.id, img, reply_markup=ch_keyboard)
             # print(tree.value)
             # print(tree)
 
 
-def main(call):
+# def db_connect():
 
+
+
+def main(call):
     print(tree)
-    bot.send_message(call.message.chat.id, "Privet Ya Tebe pomogu)")
+    bot.send_message(call.chat.id, "Privet Ya Tebe pomogu)")
     img = open("resources/pink.png", 'rb')
-    bot.send_message(call.message.chat.id, "Do you like it?")
-    bot.send_photo(call.message.chat.id, img, reply_markup=ch_keyboard)
+    bot.send_message(call.chat.id, "Do you like it?")
+    bot.send_photo(call.chat.id, img, reply_markup=ch_keyboard)
+
 
 
