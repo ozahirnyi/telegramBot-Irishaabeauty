@@ -4,7 +4,24 @@ bot = tb.TeleBot('1481133710:AAHc6yyPa3bQJcV86C2HQ9xBmpxNPh-h1hk')
 
 # Main keyboard
 main_keyboard = tb.types.ReplyKeyboardMarkup(True)
-main_keyboard.row('Price', 'Contacts', 'Help')
+main_keyboard.add("Мои работы")
+main_keyboard.row("📝 Как записаться", "👸🏼 Подобрать образ")
+main_keyboard.row("💬 Важно знать", "📞 Контакты")
+
+# # Main buttons | mkb = Main keyboard button
+# mkb_myWorks = tb.types.InlineKeyboardButton(text=":art: мои работы", callback_data="My works")
+# mkb_offers = tb.types.InlineKeyboardButton(text="📝 Как записаться", callback_data="Offers")
+# mkb_binTree = tb.types.InlineKeyboardButton(text="👸🏼 Подобрать образ", callback_data="Bin tree")
+# mkb_needToKnow = tb.types.InlineKeyboardButton(text="💬 Важно знать", callback_data="Need to know")
+# mkb_contacts = tb.types.InlineKeyboardButton(text="📞 Контакты", callback_data="Contacts")
+#
+#
+# # Main keyboard
+# main_keyboard = tb.types.InlineKeyboardMarkup()
+# main_keyboard.add(mkb_myWorks)
+# main_keyboard.row(mkb_offers, mkb_binTree)
+# main_keyboard.row(mkb_needToKnow, mkb_contacts)
+
 
 # Start keyboard
 s_key_b1 = tb.types.InlineKeyboardButton(text="Заказать", callback_data="Zakazat")
