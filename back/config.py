@@ -7,6 +7,17 @@ main_keyboard = tb.types.ReplyKeyboardMarkup(True)
 main_keyboard.add("Мои работы")
 main_keyboard.row("📝 Как записаться", "👸🏼 Подобрать образ")
 main_keyboard.row("💬 Важно знать", "📞 Контакты")
+main_keyboard.add("Прайс")
+
+# Contact keyboard
+contact_keyboard = tb.types.InlineKeyboardMarkup()
+contact_instagram_button = tb.types.InlineKeyboardButton(text='Instagram', url='https://instagram.com/irishaa_beauty'
+                                                                           '?igshid=1hxkt1nbk45w3')
+contact_telegram_button = tb.types.InlineKeyboardButton(text='Telegram', url='t.me/irishaa_antonova')
+contact_number_button = tb.types.InlineKeyboardButton(text='Phone')
+contact_keyboard.add(contact_instagram_button)
+contact_keyboard.add(contact_telegram_button)
+contact_keyboard.add(contact_number_button)
 
 # # Main buttons | mkb = Main keyboard button
 # mkb_myWorks = tb.types.InlineKeyboardButton(text=":art: мои работы", callback_data="My works")

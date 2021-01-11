@@ -13,24 +13,17 @@ def start_message(message):
 # Main button pressed
 @bot.message_handler(content_types=['text'])
 def parse_input_message(message):
-    if message.text.lower() == 'help':
-        bot.send_message(message.chat.id, "Подобрать макияж онлайн      Тупа сразу заказать.",
-                         reply_markup=start_keyboard)
-    elif message.text.lower() == 'мои работы':
+    bot.send_message(message.chat.id, 'yo sobaki')
+    if message.text.lower() == 'мои работы':
         callback.myWorks(message)
     elif message.text.lower() == '📝 как записаться':
         callback.offers(message)
+    elif message.text.lower() == '💬 важно знать':
+        callback.needToKnow(message)
+    elif message.text.lower() == '📞 контакты':
+        callback.contacts(message)
     elif message.text.lower() == '👸🏼 подобрать образ':
-        print('qwe')
         binary.main(message)
-    elif message.text.lower() == 'price':
-        img = open("resources/test_screen.png", 'rb')
-        bot.send_message(message.chat.id, "Улыбка на Миллион! : 327 гривень")
-        bot.send_photo(message.chat.id, img)
-    elif message.text.lower() == 'contacts':
-        bot.send_message(message.chat.id, "instagram: @irisha_beauty"
-                                          "\n\ntelegram: @irishaa_antonova"
-                                          "\n\nphone: +380952180492")
     else:
         bot.send_message(message.chat.id, "Oops something wrong!", reply_markup=main_keyboard)
 
