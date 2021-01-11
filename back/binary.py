@@ -30,8 +30,8 @@ class colors_enum(tuple):
     __getattr__ = tuple.index
 
 
-# Colors_enum init
-Colors = colors_enum(['svad', 'nude', 'even', 'cock', 'creative'])
+# Make_types_enum init
+make_types = colors_enum(['svad', 'nude', 'even', 'cock', 'creative'])
 
 # Binary tree init
 tree = binary_init()
@@ -44,7 +44,7 @@ def tree_helper_init(call):
     if call.message:
         print(tree)
         if tree.left is None or tree.right is None:
-            bot.send_message(call.message.chat.id, "Vash vibor: " + Colors[tree.value])
+            bot.send_message(call.message.chat.id, "Vash vibor: " + make_types[tree.value])
         else:
             if call.data == "First":
                 print("First")
@@ -53,8 +53,8 @@ def tree_helper_init(call):
                 print("Second")
                 tree = tree.right
             bot.send_message(call.message.chat.id, "Do you like it?")
-            print(Colors[tree.value])
-            img = open("resources/" + Colors[tree.value] + str(rand.randint(0, 2)) + ".jpeg", 'rb')
+            print(make_types[tree.value])
+            img = open("resources/" + make_types[tree.value] + str(rand.randint(0, 2)) + ".jpeg", 'rb')
             bot.send_photo(call.message.chat.id, img, reply_markup=ch_keyboard)
             # print(tree.value)
             # print(tree)
@@ -63,13 +63,9 @@ def tree_helper_init(call):
 # def db_connect():
 
 
-
 def main(call):
     print(tree)
     bot.send_message(call.chat.id, "Privet Ya Tebe pomogu)")
     img = open("resources/pink.png", 'rb')
     bot.send_message(call.chat.id, "Do you like it?")
     bot.send_photo(call.chat.id, img, reply_markup=ch_keyboard)
-
-
-
