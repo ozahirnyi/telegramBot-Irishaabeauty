@@ -1,6 +1,7 @@
 import telebot as tb
+from back.token import irishaToken
 
-bot = tb.TeleBot('1481133710:AAHc6yyPa3bQJcV86C2HQ9xBmpxNPh-h1hk')
+bot = tb.TeleBot(irishaToken)
 
 # Main keyboard
 main_keyboard = tb.types.ReplyKeyboardMarkup(True)
@@ -14,10 +15,10 @@ contact_keyboard = tb.types.InlineKeyboardMarkup()
 contact_instagram_button = tb.types.InlineKeyboardButton(text='Instagram', url='https://instagram.com/irishaa_beauty'
                                                                            '?igshid=1hxkt1nbk45w3')
 contact_telegram_button = tb.types.InlineKeyboardButton(text='Telegram', url='t.me/irishaa_antonova')
-contact_number_button = tb.types.InlineKeyboardButton(text='Phone')
-contact_keyboard.add(contact_instagram_button)
-contact_keyboard.add(contact_telegram_button)
+contact_number_button = tb.types.InlineKeyboardButton(text='Phone', callback_data="phone")
 contact_keyboard.add(contact_number_button)
+contact_keyboard.add(contact_telegram_button)
+contact_keyboard.add(contact_instagram_button)
 
 # # Main buttons | mkb = Main keyboard button
 # mkb_myWorks = tb.types.InlineKeyboardButton(text=":art: мои работы", callback_data="My works")

@@ -34,6 +34,8 @@ def help_handler(call):
     if call.message:
         if call.data == "First" or call.data == "Second":
             binary.tree_helper_init(call)
+        elif call.data == "phone":
+            callback.phone(call)
         else:
             bot.send_message(call.message.chat.id, "Oops, something wrong!", main_keyboard)
 

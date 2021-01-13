@@ -13,6 +13,10 @@ def myWorks(message):
                      + caption, parse_mode='HTML')
 
 
+def phone(call):
+    bot.send_message(call.message.chat.id, "Ирина: +380952180492")
+
+
 def contacts(message):
     bot.send_message(message.chat.id, "Звоните/пишите – с удовольствием отвечу на все "
                                       "интересующие Вас вопросы)", reply_markup=contact_keyboard)
