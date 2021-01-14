@@ -2,7 +2,7 @@ from back.config import bot, contact_keyboard
 
 
 def needToKnow(message):
-    img = open("../resources/need_to_know.png", 'rb')
+    img = open("/app/resources/need_to_know.png", 'rb')
     bot.send_photo(message.chat.id, img)
 
 
@@ -14,7 +14,7 @@ def myWorks(message):
 
 
 def price(message):
-    img = open("../resources/price.png", 'rb')
+    img = open("/app/resources/price.png", 'rb')
     bot.send_photo(message.chat.id, img)
 
 
@@ -24,7 +24,7 @@ def contacts(message):
 
 
 def offers(message):
-    img = open("../resources/offers.png", 'rb')
+    img = open("/app/resources/offers.png", 'rb')
     bot.send_photo(message.chat.id, img)
 
 
