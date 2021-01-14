@@ -1,5 +1,5 @@
 import telebot as tb
-from back.token import irishaToken
+from back.bot_token import irishaToken
 
 bot = tb.TeleBot(irishaToken)
 
