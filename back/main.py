@@ -1,4 +1,4 @@
-from back.config import bot, main_keyboard, start_keyboard
+from back.config import bot, main_keyboard
 import back.binary as binary
 import back.callback as callback
 
@@ -13,7 +13,6 @@ def start_message(message):
 # Main button pressed
 @bot.message_handler(content_types=['text'])
 def parse_input_message(message):
-    bot.send_message(message.chat.id, 'yo sobaki')
     if message.text.lower() == 'мои работы':
         callback.myWorks(message)
     elif message.text.lower() == '📝 как записаться':
@@ -22,6 +21,8 @@ def parse_input_message(message):
         callback.needToKnow(message)
     elif message.text.lower() == '📞 контакты':
         callback.contacts(message)
+    elif message.text.lower() == 'прайс':
+        callback.price(message)
     elif message.text.lower() == '👸🏼 подобрать образ':
         binary.main(message)
     else:
