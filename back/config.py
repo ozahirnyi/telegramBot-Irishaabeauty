@@ -1,7 +1,14 @@
 import telebot as tb
 from back.bot_token import irishaToken
+from db import Db
 
+# Bot init
 bot = tb.TeleBot(irishaToken)
+
+# Data base init
+data_base = Db()
+data_base.create_table()
+
 
 # Main keyboard
 main_keyboard = tb.types.ReplyKeyboardMarkup(True)
