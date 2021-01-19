@@ -1,7 +1,6 @@
 import random as rand
-import sqlite3
-from sqlite3 import Error
 from binarytree import Node
+from db import Db
 from back.config import bot, ch_keyboard
 
 
@@ -58,6 +57,11 @@ def tree_helper_init(call):
 
 
 def main(call):
+    data_base = Db()
+    data_base.create_table()
+    data_base.insert_data(11, 3)
+    data_base.print_db()
+    print(call)
     print(tree)
     bot.send_message(call.chat.id, "Privet Ya Tebe pomogu)")
     img = open("../resources/pink.png", 'rb')

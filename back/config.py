@@ -1,14 +1,8 @@
 import telebot as tb
 from back.bot_token import irishaToken
-from db import Db
 
 # Bot init
 bot = tb.TeleBot(irishaToken)
-
-# Data base init
-data_base = Db()
-data_base.create_table()
-
 
 # Main keyboard
 main_keyboard = tb.types.ReplyKeyboardMarkup(True)
@@ -19,28 +13,27 @@ main_keyboard.add("Прайс")
 
 # Contact keyboard
 contact_keyboard = tb.types.InlineKeyboardMarkup()
-contact_instagram_button = tb.types.InlineKeyboardButton(text='Instagram', url='https://instagram.com/irishaa_beauty'
-                                                                           '?igshid=1hxkt1nbk45w3')
+contact_instagram_button = tb.types.InlineKeyboardButton(text='Instagram',
+                                                         url='https://instagram.com/irishaa_beauty?'
+                                                             'igshid=1hxkt1nbk45w3')
 contact_telegram_button = tb.types.InlineKeyboardButton(text='Telegram', url='t.me/irishaa_antonova')
 contact_number_button = tb.types.InlineKeyboardButton(text='Phone', callback_data="phone")
 contact_keyboard.add(contact_number_button)
 contact_keyboard.add(contact_telegram_button)
 contact_keyboard.add(contact_instagram_button)
 
-# # Main buttons | mkb = Main keyboard button
+# Main buttons | mkb = Main keyboard button
 # mkb_myWorks = tb.types.InlineKeyboardButton(text=":art: мои работы", callback_data="My works")
 # mkb_offers = tb.types.InlineKeyboardButton(text="📝 Как записаться", callback_data="Offers")
 # mkb_binTree = tb.types.InlineKeyboardButton(text="👸🏼 Подобрать образ", callback_data="Bin tree")
 # mkb_needToKnow = tb.types.InlineKeyboardButton(text="💬 Важно знать", callback_data="Need to know")
 # mkb_contacts = tb.types.InlineKeyboardButton(text="📞 Контакты", callback_data="Contacts")
 #
-#
 # # Main keyboard
 # main_keyboard = tb.types.InlineKeyboardMarkup()
 # main_keyboard.add(mkb_myWorks)
 # main_keyboard.row(mkb_offers, mkb_binTree)
 # main_keyboard.row(mkb_needToKnow, mkb_contacts)
-
 
 # Start keyboard
 s_key_b1 = tb.types.InlineKeyboardButton(text="Заказать", callback_data="Zakazat")
