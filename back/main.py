@@ -1,7 +1,6 @@
 from back.config import bot, main_keyboard
 import back.binary as binary
 import back.callback as callback
-from db import Db
 
 
 # Start
