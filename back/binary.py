@@ -1,4 +1,3 @@
-import random as rand
 from binarytree import Node
 from db import Db
 from back.config import bot, ch_keyboard
@@ -15,8 +14,8 @@ def binary_init():
     b_tree.right.right = Node(422)
     b_tree.left.left.left = Node(8111)
     b_tree.left.left.right = Node(9211)
-    b_tree.right.right.left = Node(-8122)
-    b_tree.right.right.right = Node(-9222)
+    b_tree.right.right.left = Node(8122)
+    b_tree.right.right.right = Node(9222)
     return b_tree
 
 
@@ -34,16 +33,28 @@ def get_position(current_position, tree):
     sign = 1 if current_position > 0 else -1
     value_n_position = []
 
+    print("Current v get_position: %s" % current_position)
     while current_position < 0 or current_position > 9:
-        if current_position % (10 * sign) == 1:
-            tree = tree.left
-            current_position /= 10
-        elif current_position % (10 * sign) == 2:
-            tree = tree.right
-            current_position /= 10
+        if current_position > 0:
+            if current_position % (10 * sign) == 1 * sign:
+                tree = tree.left
+                current_position //= 10
+            elif current_position % (10 * sign) == 2 * sign:
+                tree = tree.right
+                current_position //= 10
+        elif current_position < 0:
+            if current_position % -10 == 1 * sign:
+                tree = tree.left
+                current_position //= 10
+            elif current_position % -10 == 2 * sign:
+                tree = tree.right
+                current_position //= 10
+        else:
+            print("Error in get_position with value: %d" % (current_position % (10 * sign)))
+            return -1
     print("Current position: %s" % current_position)
     print("Tree: %s" % tree)
-    value_n_position.append(current_position)
+    value_n_position.append(int(current_position))
     value_n_position.append(tree)
     return value_n_position
 
@@ -53,27 +64,31 @@ def tree_helper_init(call):
     if call.message:
         tree = binary_init()
 
-        print(tree)
         data_base = Db()
         data_base.create_table()
         data_base.print_db()
-        position_value = data_base.get_data(call.message.chat.id)
+        value_from_bd = int(data_base.get_data(call.message.chat.id))
 
-        if 3 <= position_value <= 9:
-            bot.send_message(call.message.chat.id, "Your answer is: %s" % position_value)
+        print("Position s BD: %s" % value_from_bd)
+
+        value_n_position = get_position(value_from_bd, tree)
+        print("Value_n_position: %s" % value_n_position)
+
+        if value_n_position == -1:
+            bot.send_message(call.message.chat.id, "Oops, something wrong..(")
+            data_base.insert_data(call.message.chat.id, 0, 0)
+        elif 8 <= value_n_position[0] <= 9:
+            bot.send_message(call.message.chat.id, "Your answer is: %s" % value_n_position[0])
+            data_base.insert_data(call.message.chat.id, 0, 0)
         else:
-            value_n_position = get_position(position_value, tree)
-            print("Value_n_position: %s" % value_n_position)
+            bot.send_message(call.message.chat.id, "Your value is: %s" % value_n_position[0], reply_markup=ch_keyboard)
+            data_base.print_db()
             if call.data == "First":
                 print("First")
-                bot.send_message(call.message.chat.id, "Your value is: %s" % value_n_position[0])
-                data_base.insert_data(call.message.chat.id, int(value_n_position[1].left.value))
-                data_base.print_db()
+                data_base.insert_data(call.message.chat.id, value_n_position[1].left.value, 0)
             elif call.data == "Second":
                 print("Second")
-                bot.send_message(call.message.chat.id, "Your value is: %s" % value_n_position[0])
-                data_base.insert_data(call.message.chat.id, value_n_position[1].right.value)
-                data_base.print_db()
+                data_base.insert_data(call.message.chat.id, value_n_position[1].right.value, 0)
 
 
 def main(call):
