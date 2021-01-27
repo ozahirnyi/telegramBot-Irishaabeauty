@@ -35,6 +35,8 @@ def help_handler(call):
     if call.message:
         if call.data == "First" or call.data == "Second":
             binary.tree_helper_init(call)
+        elif call.data == "Start Choose":
+            binary.tree_helper_init_start(call)
         elif call.data == "phone":
             callback.phone(call)
         else:

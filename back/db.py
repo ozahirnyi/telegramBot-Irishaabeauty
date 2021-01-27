@@ -21,24 +21,18 @@ class Db:
 
     def get_data(self, user_id):
         cursor = self.connection.cursor()
-        print("Getting")
-        cursor.execute('SELECT tree_value, tree_path FROM users WHERE user_id=%d' % user_id)
-        print("Before return: %s" % str(cursor.fetchone()))
-        try:
-            return cursor.fetchone()
-        except TypeError:
-            return [0, 0]
+        cursor.execute('SELECT tree_path FROM users WHERE user_id=%d' % user_id)
+        result = cursor.fetchone()
+        return 0 if result is None else result[0]
 
-    def insert_data(self, user_id, tree_value, tree_path):
+    def insert_data(self, user_id, tree_path):
         cursor = self.connection.cursor()
-        print("Adding")
-        cursor.execute('INSERT OR REPLACE INTO users VALUES(%d, %d, %d)' % (user_id, tree_value, tree_path))
+        cursor.execute('INSERT OR REPLACE INTO users VALUES(%d, %d)' % (user_id, tree_path))
         self.connection.commit()
 
     def create_table(self):
         cursor = self.connection.cursor()
         cursor.execute('CREATE TABLE IF NOT EXISTS users('
                        'user_id integer UNIQUE, '
-                       'tree_value integer, '
                        'tree_path integer)')
         self.connection.commit()

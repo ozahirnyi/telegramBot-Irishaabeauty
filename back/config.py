@@ -6,10 +6,10 @@ bot = tb.TeleBot(irishaToken)
 
 # Main keyboard
 main_keyboard = tb.types.ReplyKeyboardMarkup(True)
-main_keyboard.add("Мои работы")
+main_keyboard.add(":disappointed: Мои работы")
 main_keyboard.row("📝 Как записаться", "👸🏼 Подобрать образ")
 main_keyboard.row("💬 Важно знать", "📞 Контакты")
-main_keyboard.add("Прайс")
+main_keyboard.add("🤑 Прайс")
 
 # Contact keyboard
 contact_keyboard = tb.types.InlineKeyboardMarkup()
@@ -41,8 +41,15 @@ s_key_b2 = tb.types.InlineKeyboardButton(text="Подобрать", callback_dat
 start_keyboard = tb.types.InlineKeyboardMarkup()
 start_keyboard.add(s_key_b2, s_key_b1)
 
+# Choose start keyboard
+ch_key_start = tb.types.InlineKeyboardButton(text='Старт', callback_data="Start Choose")
+ch_start_keyboard = tb.types.InlineKeyboardMarkup()
+ch_start_keyboard.add(ch_key_start)
+
 # Choose helper keyboard
 ch_key_b1 = tb.types.InlineKeyboardButton(text="Первое", callback_data="First")
 ch_key_b2 = tb.types.InlineKeyboardButton(text="Второе", callback_data="Second")
 ch_keyboard = tb.types.InlineKeyboardMarkup()
 ch_keyboard.add(ch_key_b1, ch_key_b2)
+
+
