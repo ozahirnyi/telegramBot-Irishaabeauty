@@ -6,7 +6,7 @@ bot = tb.TeleBot(irishaToken)
 
 # Main keyboard
 main_keyboard = tb.types.ReplyKeyboardMarkup(True)
-main_keyboard.add(":disappointed: Мои работы")
+main_keyboard.add("Мои работы")
 main_keyboard.row("📝 Как записаться", "👸🏼 Подобрать образ")
 main_keyboard.row("💬 Важно знать", "📞 Контакты")
 main_keyboard.add("🤑 Прайс")

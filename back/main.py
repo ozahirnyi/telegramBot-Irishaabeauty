@@ -21,7 +21,7 @@ def parse_input_message(message):
         callback.needToKnow(message)
     elif message.text.lower() == '📞 контакты':
         callback.contacts(message)
-    elif message.text.lower() == 'прайс':
+    elif message.text.lower() == '🤑 прайс':
         callback.price(message)
     elif message.text.lower() == '👸🏼 подобрать образ':
         binary.main(message)
