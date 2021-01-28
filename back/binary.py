@@ -8,12 +8,12 @@ def binary_init():
     b_tree = Node(0)
     b_tree.left = Node(1)
     b_tree.right = Node(2)
-    b_tree.left.left = Node(3)
-    b_tree.left.left.left = Node(5)
-    b_tree.left.left.right = Node(6)
-    b_tree.left.right = Node(4)
-    b_tree.left.right.left = Node(7)
-    b_tree.left.right.right = Node(8)
+    b_tree.right.left = Node(3)
+    b_tree.right.left.left = Node(5)
+    b_tree.right.left.right = Node(6)
+    b_tree.right.right = Node(4)
+    b_tree.right.right.left = Node(7)
+    b_tree.right.right.right = Node(8)
     return b_tree
 
 
@@ -23,31 +23,29 @@ class colors_enum(tuple):
 
 
 # Make_types_enum init
-make_types = colors_enum(['weddingQuestion', 'eventTime', 'weddingTrue',
+make_types = colors_enum(['weddingQuestion', 'weedingTrue', 'eventTime',
                           'dayEvent', 'nightEvent', 'day', 'cocktail', 'evening', 'creative'])
 
 
 def get_response(result):
     value = make_types[result]
 
-    if value == 'typeOfEvent':
-        return ''
-    elif value == 'weddingQuestion':
+    if value == 'weddingQuestion':
         return 'Возможно Вы невеста?'
-    elif value == 'dayEvent':
-        return ''
     elif value == 'weddingTrue':
-        return ''
+        return 'Прекрасно! Тогда Вам подойте Свадебный макиякж. С примерами можете ознакомится в моем инстаграмме'
+    elif value == 'dayEvent':
+        return 'Отлично! Вы желаете более спокойный макияж или, быть может, коктейльный?'
     elif value == 'eveningEvent':
-        return ''
+        return 'Отлично! Возможно Вашему мероприятию подойдет креативный макияж?'
     elif value == 'day':
-        return ''
+        return 'Чудесно! Вам идельно подойдет Нюдовый макияж, С примерами можете ознакомится в моем инстаграмме'
     elif value == 'cocktail':
-        return ''
+        return 'Чудесно! Вам идельно подойдет Коктейльный макияж, С примерами можете ознакомится в моем инстаграмме'
     elif value == 'evening':
-        return ''
+        return 'Чудесно! Вам идельно подойдет Вечерний макияж, С примерами можете ознакомится в моем инстаграмме'
     elif value == 'creative':
-        return ''
+        return 'Чудесно! Вам идельно подойдет Креативный макияж, С примерами можете ознакомится в моем инстаграмме'
     else:
         return "Oops, something wrong..("
 
@@ -78,7 +76,7 @@ def path_update(direction, current_path):
     while current_path:
         buf.append(current_path % 10)
         current_path //= 10
-    buf.sort(reverse=True)
+    buf.reverse()
     for i in buf:
         res = res * 10 + i
     return res
@@ -103,16 +101,16 @@ def tree_helper_init(call):
             tree_path = path_update(2, tree_path)
             data_base.insert_data(call.message.chat.id, tree_path)
 
-# Get value for make_types and give a response
+        # Get value for make_types and give a response
         value = get_value(tree_path, tree)
         if value == -1:
             bot.send_message(call.message.chat.id, "Oops, something wrong..(")
             data_base.insert_data(call.message.chat.id, 0)
-        elif 5 <= value <= 8 or value == 2:
-            bot.send_message(call.message.chat.id, "Your answer is: %s" % value)
+        elif 5 <= value <= 8 or value == 1:
+            bot.send_message(call.message.chat.id, make_types[value])
             data_base.insert_data(call.message.chat.id, 0)
         else:
-            bot.send_message(call.message.chat.id, "Your value is: %s" % value, reply_markup=ch_keyboard)
+            bot.send_message(call.message.chat.id, "Your value is: %s" % make_types[value], reply_markup=ch_keyboard[value])
 
 
 def tree_helper_init_start(call):
