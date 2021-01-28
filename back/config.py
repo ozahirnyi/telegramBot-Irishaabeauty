@@ -22,19 +22,6 @@ contact_keyboard.add(contact_number_button)
 contact_keyboard.add(contact_telegram_button)
 contact_keyboard.add(contact_instagram_button)
 
-# Main buttons | mkb = Main keyboard button
-# mkb_myWorks = tb.types.InlineKeyboardButton(text=":art: мои работы", callback_data="My works")
-# mkb_offers = tb.types.InlineKeyboardButton(text="📝 Как записаться", callback_data="Offers")
-# mkb_binTree = tb.types.InlineKeyboardButton(text="👸🏼 Подобрать образ", callback_data="Bin tree")
-# mkb_needToKnow = tb.types.InlineKeyboardButton(text="💬 Важно знать", callback_data="Need to know")
-# mkb_contacts = tb.types.InlineKeyboardButton(text="📞 Контакты", callback_data="Contacts")
-#
-# # Main keyboard
-# main_keyboard = tb.types.InlineKeyboardMarkup()
-# main_keyboard.add(mkb_myWorks)
-# main_keyboard.row(mkb_offers, mkb_binTree)
-# main_keyboard.row(mkb_needToKnow, mkb_contacts)
-
 # Start keyboard
 s_key_b1 = tb.types.InlineKeyboardButton(text="Заказать", callback_data="Zakazat")
 s_key_b2 = tb.types.InlineKeyboardButton(text="Подобрать", callback_data="Vibrat")
@@ -46,10 +33,20 @@ ch_key_start = tb.types.InlineKeyboardButton(text='Старт', callback_data="S
 ch_start_keyboard = tb.types.InlineKeyboardMarkup()
 ch_start_keyboard.add(ch_key_start)
 
-# Choose helper keyboard
-ch_key_b1 = tb.types.InlineKeyboardButton(text="Первое", callback_data="First")
-ch_key_b2 = tb.types.InlineKeyboardButton(text="Второе", callback_data="Second")
-ch_keyboard = tb.types.InlineKeyboardMarkup()
-ch_keyboard.add(ch_key_b1, ch_key_b2)
-
-
+# Choose helper keyboards
+ch_key_b00 = tb.types.InlineKeyboardButton(text="Да, я невеста!", callback_data="First")
+ch_key_b01 = tb.types.InlineKeyboardButton(text="Нет", callback_data="Second")
+ch_key_b10 = tb.types.InlineKeyboardButton(text="Нет", callback_data="Second")
+ch_key_b11 = tb.types.InlineKeyboardButton(text="Нет", callback_data="Second")
+ch_key_b20 = tb.types.InlineKeyboardButton(text="Нет", callback_data="Second")
+ch_key_b21 = tb.types.InlineKeyboardButton(text="Нет", callback_data="Second")
+ch_key_b30 = tb.types.InlineKeyboardButton(text="Нет", callback_data="Second")
+ch_key_b31 = tb.types.InlineKeyboardButton(text="Нет", callback_data="Second")
+ch_keyboard0 = tb.types.InlineKeyboardMarkup()
+ch_keyboard1 = tb.types.InlineKeyboardMarkup()
+ch_keyboard2 = tb.types.InlineKeyboardMarkup()
+ch_keyboard3 = tb.types.InlineKeyboardMarkup()
+ch_keyboard0.add(ch_key_b00, ch_key_b01)
+ch_keyboard0.add(ch_key_b10, ch_key_b11)
+ch_keyboard0.add(ch_key_b20, ch_key_b21)
+ch_keyboard0.add(ch_key_b30, ch_key_b31)
