@@ -32,11 +32,13 @@ def get_response(result):
 
     if value == 'weddingQuestion':
         return 'Возможно Вы невеста?'
-    elif value == 'weddingTrue':
+    elif value == 'weedingTrue':
         return 'Прекрасно! Тогда Вам подойте Свадебный макиякж. С примерами можете ознакомится в моем инстаграмме'
+    elif value == 'eventTime':
+        return 'Ваше мероприятие будет проходить вечером или днём?'
     elif value == 'dayEvent':
         return 'Отлично! Вы желаете более спокойный макияж или, быть может, коктейльный?'
-    elif value == 'eveningEvent':
+    elif value == 'nightEvent':
         return 'Отлично! Возможно Вашему мероприятию подойдет креативный макияж?'
     elif value == 'day':
         return 'Чудесно! Вам идельно подойдет Нюдовый макияж, С примерами можете ознакомится в моем инстаграмме'
@@ -107,10 +109,10 @@ def tree_helper_init(call):
             bot.send_message(call.message.chat.id, "Oops, something wrong..(")
             data_base.insert_data(call.message.chat.id, 0)
         elif 5 <= value <= 8 or value == 1:
-            bot.send_message(call.message.chat.id, make_types[value])
+            bot.send_message(call.message.chat.id, get_response(value))
             data_base.insert_data(call.message.chat.id, 0)
         else:
-            bot.send_message(call.message.chat.id, "Your value is: %s" % make_types[value], reply_markup=ch_keyboard[value])
+            bot.send_message(call.message.chat.id, get_response(value), reply_markup=ch_keyboard[value])
 
 
 def tree_helper_init_start(call):
