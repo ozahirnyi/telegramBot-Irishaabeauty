@@ -64,7 +64,6 @@ def get_value(current_position, tree):
         elif current_position == 2 or current_position % 10 == 2:
             tree = tree.right
             current_position //= 10
-    print("Tree: %s" % tree)
     if tree is None:
         return -1
     return tree.value
@@ -93,7 +92,6 @@ def tree_helper_init(call):
         tree = binary_init()
         data_base = Db()
         data_base.create_table()
-        data_base.print_db()
         tree_path = data_base.get_data(call.message.chat.id)
 
         if call.data == "First":
@@ -113,6 +111,8 @@ def tree_helper_init(call):
             data_base.insert_data(call.message.chat.id, 0)
         else:
             bot.send_message(call.message.chat.id, get_response(value), reply_markup=ch_keyboard[value])
+        if value != 0:
+            bot.edit_message_reply_markup(call.message.chat.id, message_id=call.message.message_id, reply_markup=None)
 
 
 def tree_helper_init_start(call):
