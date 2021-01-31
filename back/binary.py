@@ -1,6 +1,6 @@
 from binarytree import Node
 from db import Db
-from back.config import bot, ch_keyboard, ch_start_keyboard
+from back.config import bot, ch_keyboard, ch_start_keyboard, information_desk_person
 
 
 # Binary tree filling
@@ -33,7 +33,8 @@ def get_response(result):
     if value == 'weddingQuestion':
         return 'Возможно Вы невеста?'
     elif value == 'weedingTrue':
-        return 'Прекрасно! Тогда Вам подойте Свадебный макиякж. С примерами можете ознакомится в моем инстаграмме'
+        return 'Прекрасно! Тогда Вам подойте Свадебный макиякж. С примерами можете ознакомится в моем инстаграмме ' \
+               + information_desk_person
     elif value == 'eventTime':
         return 'Ваше мероприятие будет проходить вечером или днём?'
     elif value == 'dayEvent':
@@ -41,22 +42,23 @@ def get_response(result):
     elif value == 'nightEvent':
         return 'Отлично! Возможно Вашему мероприятию подойдет креативный макияж?'
     elif value == 'day':
-        return 'Чудесно! Вам идельно подойдет Нюдовый макияж, С примерами можете ознакомится в моем инстаграмме'
+        return 'Чудесно! Вам идельно подойдет Нюдовый макияж, С примерами можете ознакомится в моем инстаграмме ' \
+               + information_desk_person
     elif value == 'cocktail':
-        return 'Чудесно! Вам идельно подойдет Коктейльный макияж, С примерами можете ознакомится в моем инстаграмме'
+        return 'Чудесно! Вам идельно подойдет Коктейльный макияж, С примерами можете ознакомится в моем инстаграмме ' \
+               + information_desk_person
     elif value == 'evening':
-        return 'Чудесно! Вам идельно подойдет Вечерний макияж, С примерами можете ознакомится в моем инстаграмме'
+        return 'Чудесно! Вам идельно подойдет Вечерний макияж, С примерами можете ознакомится в моем инстаграмме ' \
+               + information_desk_person
     elif value == 'creative':
-        return 'Чудесно! Вам идельно подойдет Креативный макияж, С примерами можете ознакомится в моем инстаграмме'
+        return 'Чудесно! Вам идельно подойдет Креативный макияж, С примерами можете ознакомится в моем инстаграмме ' \
+               + information_desk_person
     else:
         return "Oops, something wrong..("
 
 
 # Get value by moving in binary tree to left(if we get '1') and right(if we get '2')
 def get_value(current_position, tree):
-    if tree is None:
-        return -1
-
     while current_position:
         if current_position == 1 or current_position % 10 == 1:
             tree = tree.left
@@ -64,8 +66,6 @@ def get_value(current_position, tree):
         elif current_position == 2 or current_position % 10 == 2:
             tree = tree.right
             current_position //= 10
-    if tree is None:
-        return -1
     return tree.value
 
 
@@ -91,7 +91,6 @@ def tree_helper_init(call):
     if call.message:
         tree = binary_init()
         data_base = Db()
-        data_base.create_table()
         tree_path = data_base.get_data(call.message.chat.id)
 
         if call.data == "First":
@@ -100,7 +99,6 @@ def tree_helper_init(call):
         elif call.data == "Second":
             tree_path = path_update(2, tree_path)
             data_base.insert_data(call.message.chat.id, tree_path)
-
         # Get value for make_types and give a response
         value = get_value(tree_path, tree)
         if value == -1:
@@ -116,8 +114,7 @@ def tree_helper_init(call):
 
 
 def tree_helper_init_start(call):
-    data_base = Db()
-    data_base.create_table()
+    data_base = Db(create_table=True)
     data_base.insert_data(call.message.chat.id, 0)
     tree_helper_init(call)
 

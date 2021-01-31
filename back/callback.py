@@ -1,4 +1,4 @@
-from back.config import bot, contact_keyboard
+from back.config import bot, contact_keyboard, smiles
 
 
 def needToKnow(message):
@@ -10,7 +10,7 @@ def myWorks(message):
     caption = "<a href='https://instagram.com/irishaa_beauty?igshid=1hxkt1nbk45w3'>irishaa_beauty</a>"
 
     bot.send_message(message.chat.id, "С моими работами Вы можете ознакомиться в Инстаграм: "
-                     + caption, parse_mode='HTML')
+                     + smiles[0] + ' ' + caption + ' ' + smiles[2], parse_mode='HTML')
 
 
 def price(message):

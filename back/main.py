@@ -1,19 +1,20 @@
 from back.config import bot, main_keyboard
 import back.binary as binary
 import back.callback as callback
+from back.config import smiles
 
 
 # Start
 @bot.message_handler(commands=['start'])
 def start_message(message):
-    bot.send_message(message.chat.id, 'Привет! Это телеграм-бот @irishaa_antonova, чем могу помочь?',
-                     reply_markup=main_keyboard)
+    bot.send_message(message.chat.id, 'Привет! Это телеграм-бот @irishaa_antonova, чем могу помочь? '
+                     + smiles[6], reply_markup=main_keyboard)
 
 
 # Main button pressed
 @bot.message_handler(content_types=['text'])
 def parse_input_message(message):
-    if message.text.lower() == 'мои работы':
+    if message.text.lower() == smiles[5] + ' мои работы':
         callback.myWorks(message)
     elif message.text.lower() == '📝 как записаться':
         callback.offers(message)
@@ -21,9 +22,9 @@ def parse_input_message(message):
         callback.needToKnow(message)
     elif message.text.lower() == '📞 контакты':
         callback.contacts(message)
-    elif message.text.lower() == '🤑 прайс':
+    elif message.text.lower() == smiles[1] + ' прайс':
         callback.price(message)
-    elif message.text.lower() == '👸🏼 подобрать образ':
+    elif message.text.lower() == smiles[4] + ' подобрать образ':
         binary.main(message)
     else:
         bot.send_message(message.chat.id, "Oops something wrong!", reply_markup=main_keyboard)

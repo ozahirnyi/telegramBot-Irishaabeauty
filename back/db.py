@@ -5,12 +5,14 @@ from sqlite3 import Error
 class Db:
     connection = None
 
-    def __init__(self):
-        self.db_connect()
+    def __init__(self, create_table=None):
+        self.db_connect(create_table)
 
-    def db_connect(self):
+    def db_connect(self, create_table=None):
         try:
             self.connection = sqlite3.connect('donthackmeplease.sqlite')
+            if create_table is True:
+                self.create_table()
         except Error:
             print(Error)
 
