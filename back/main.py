@@ -7,7 +7,7 @@ from back.config import smiles
 # Start
 @bot.message_handler(commands=['start'])
 def start_message(message):
-    bot.send_message(message.chat.id, 'Привет! Это телеграм-бот @irishaa_antonova, чем могу помочь? '
+    bot.send_message(message.chat.id, 'Привет!\nЭто телеграм-бот @irishaa_antonova, чем могу помочь?'
                      + smiles[6], reply_markup=main_keyboard)
 
 

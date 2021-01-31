@@ -12,6 +12,9 @@ telephone_receiver = "\N{TELEPHONE RECEIVER}"
 princess = "\N{PRINCESS}"
 artist_palette = "\N{ARTIST PALETTE}"
 smiling_face_with_smiling_eyes = "\N{SMILING FACE WITH SMILING EYES}"
+sparkles = "\N{SPARKLES}"
+incoming_envelope = "\N{INCOMING ENVELOPE}"
+mobile_phone_with_rightwards_arrow_at_left = "\N{MOBILE PHONE WITH RIGHTWARDS ARROW AT LEFT}"
 smiles = [information_desk_person, money_with_wings, winking_face, telephone_receiver,
           princess, artist_palette, smiling_face_with_smiling_eyes]
 
@@ -24,11 +27,11 @@ main_keyboard.add(money_with_wings + " Прайс")
 
 # Contact keyboard
 contact_keyboard = tb.types.InlineKeyboardMarkup()
-contact_instagram_button = tb.types.InlineKeyboardButton(text='Instagram',
+contact_instagram_button = tb.types.InlineKeyboardButton(text=mobile_phone_with_rightwards_arrow_at_left + ' Instagram',
                                                          url='https://instagram.com/irishaa_beauty?'
                                                              'igshid=1hxkt1nbk45w3')
-contact_telegram_button = tb.types.InlineKeyboardButton(text='Telegram', url='t.me/irishaa_antonova')
-contact_number_button = tb.types.InlineKeyboardButton(text=money_with_wings + ' Phone', callback_data="phone")
+contact_telegram_button = tb.types.InlineKeyboardButton(text=incoming_envelope + ' Telegram', url='t.me/irishaa_antonova')
+contact_number_button = tb.types.InlineKeyboardButton(text=telephone_receiver + ' Phone', callback_data="phone")
 contact_keyboard.add(contact_number_button)
 contact_keyboard.add(contact_telegram_button)
 contact_keyboard.add(contact_instagram_button)

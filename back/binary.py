@@ -1,6 +1,9 @@
 from binarytree import Node
+from telebot.apihelper import ApiException
+
 from db import Db
-from back.config import bot, ch_keyboard, ch_start_keyboard, information_desk_person
+from back.config import bot, ch_keyboard, ch_start_keyboard, information_desk_person, sparkles
+from callback import insta_link
 
 
 # Binary tree filling
@@ -23,7 +26,7 @@ class colors_enum(tuple):
 
 
 # Make_types_enum init
-make_types = colors_enum(['weddingQuestion', 'weedingTrue', 'eventTime',
+make_types = colors_enum(['weddingQuestion', 'weddingTrue', 'eventTime',
                           'dayEvent', 'nightEvent', 'day', 'cocktail', 'evening', 'creative'])
 
 
@@ -32,27 +35,37 @@ def get_response(result):
 
     if value == 'weddingQuestion':
         return 'Возможно Вы невеста?'
-    elif value == 'weedingTrue':
-        return 'Прекрасно! Тогда Вам подойте Свадебный макиякж. С примерами можете ознакомится в моем инстаграмме ' \
-               + information_desk_person
     elif value == 'eventTime':
         return 'Ваше мероприятие будет проходить вечером или днём?'
     elif value == 'dayEvent':
         return 'Отлично! Вы желаете более спокойный макияж или, быть может, коктейльный?'
     elif value == 'nightEvent':
         return 'Отлично! Возможно Вашему мероприятию подойдет креативный макияж?'
+    elif value == 'weddingTrue':
+        return 'Прекрасно! Тогда Вам подойте Свадебный макиякж' \
+               + sparkles + \
+               '\nС примерами можете ознакомится в моем инстаграмме ' \
+               + information_desk_person + ": "
     elif value == 'day':
-        return 'Чудесно! Вам идельно подойдет Нюдовый макияж, С примерами можете ознакомится в моем инстаграмме ' \
-               + information_desk_person
+        return 'Чудесно! Вам идельно подойдет Нюдовый макияж' \
+               + sparkles + \
+               '\nС примерами можете ознакомится в моем инстаграмме ' \
+               + information_desk_person + ": "
     elif value == 'cocktail':
-        return 'Чудесно! Вам идельно подойдет Коктейльный макияж, С примерами можете ознакомится в моем инстаграмме ' \
-               + information_desk_person
+        return 'Чудесно! Вам идельно подойдет Коктейльный макияж' \
+               + sparkles + \
+               '\nС примерами можете ознакомится в моем инстаграмме ' \
+               + information_desk_person + ": "
     elif value == 'evening':
-        return 'Чудесно! Вам идельно подойдет Вечерний макияж, С примерами можете ознакомится в моем инстаграмме ' \
-               + information_desk_person
+        return 'Чудесно! Вам идельно подойдет Вечерний макияж' \
+               + sparkles + \
+               '\nС примерами можете ознакомится в моем инстаграмме ' \
+               + information_desk_person + ": "
     elif value == 'creative':
-        return 'Чудесно! Вам идельно подойдет Креативный макияж, С примерами можете ознакомится в моем инстаграмме ' \
-               + information_desk_person
+        return 'Чудесно! Вам идельно подойдет Креативный макияж' \
+               + sparkles + \
+               '\nС примерами можете ознакомится в моем инстаграмме ' \
+               + information_desk_person + ": "
     else:
         return "Oops, something wrong..("
 
@@ -60,12 +73,16 @@ def get_response(result):
 # Get value by moving in binary tree to left(if we get '1') and right(if we get '2')
 def get_value(current_position, tree):
     while current_position:
+        if tree is None:
+            return -1
         if current_position == 1 or current_position % 10 == 1:
             tree = tree.left
             current_position //= 10
         elif current_position == 2 or current_position % 10 == 2:
             tree = tree.right
             current_position //= 10
+    if tree is None:
+        return -1
     return tree.value
 
 
@@ -85,8 +102,8 @@ def path_update(direction, current_path):
 
 # Init binary_tree for find current value by requesting data from DB(path - for move in tree)
 # First - move left in bin_tree | Second - move right in bin_tree | by adding 1 or 2 in path
-# 5, 6, 7, 8, 2 - its a final positions in bit_tree
-# if someone send wrong data from DB we will get -1, print error and give that id '0' value
+# 5, 6, 7, 8, 1 - its a final positions in bit_tree
+# if someone send wrong data from DB we will get -1, print error and give that id '0' value in DB
 def tree_helper_init(call):
     if call.message:
         tree = binary_init()
@@ -105,12 +122,18 @@ def tree_helper_init(call):
             bot.send_message(call.message.chat.id, "Oops, something wrong..(")
             data_base.insert_data(call.message.chat.id, 0)
         elif 5 <= value <= 8 or value == 1:
-            bot.send_message(call.message.chat.id, get_response(value))
+            bot.send_message(call.message.chat.id, get_response(value) + insta_link, parse_mode='HTML')
+            for i in range(0, 3):
+                img = open("resources/makeups/" + make_types[value] + str(i) + ".png", "rb")
+                bot.send_photo(call.message.chat.id, img)
             data_base.insert_data(call.message.chat.id, 0)
         else:
             bot.send_message(call.message.chat.id, get_response(value), reply_markup=ch_keyboard[value])
         if value != 0:
-            bot.edit_message_reply_markup(call.message.chat.id, message_id=call.message.message_id, reply_markup=None)
+            try:
+                bot.edit_message_reply_markup(call.message.chat.id, message_id=call.message.message_id, reply_markup=None)
+            except ApiException:
+                data_base.insert_data(call.message.chat.id, 0)
 
 
 def tree_helper_init_start(call):
