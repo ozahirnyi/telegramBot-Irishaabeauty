@@ -1,1 +1,0 @@
-irishaToken = '1481133710:AAHc6yyPa3bQJcV86C2HQ9xBmpxNPh-h1hk'
